@@ -1,0 +1,19 @@
+<?php
+
+class %%name%% extends TestCase {
+
+	/**
+	 * OPS Generated Test.
+	 *
+	 * @return void
+	 */
+	public function testBasicTest()
+	{
+		//new MongoClient();
+		$user = \App\Models\User::where('email', '%%email%%')->first();
+		$this->be($user);
+		$response = $this->call('%%method%%', '%%action%%', %%data%%)->getContent();
+		%%assert%%
+	}
+
+}

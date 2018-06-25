@@ -1,0 +1,42 @@
+{
+  "fields": [
+    {
+      "name": "uri",
+      "type": "string"
+    },
+    {
+      "name": "title",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": "select",
+      "options": ["internal", "external", "other"]
+    },
+    {
+      "name": "scraped",
+      "type": "number"
+    }
+  ],
+  "relationships": [
+    {
+      "name": "project",
+      "type": "belongsTo",
+      "class": "App\\Project"
+    }
+  ],
+  "validations": [
+    {
+      "field": "uri",
+      "rules": "required"
+    },
+    {
+      "field": "title",
+      "rules": "required"
+    },
+    {
+      "field": "type",
+      "rules": "required"
+    }
+  ]
+}

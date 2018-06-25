@@ -1,0 +1,17 @@
+        @if(isset($%%crudNameSingular%%) && isset($%%crudNameSingular%%->%1$s))
+            @foreach($%%crudNameSingular%%->%1$s as $key=>$val)
+            @foreach($val as $v)
+                <div class="form-group ">
+                    <label class="col-md-2 control-label">{{$key}} => </label>
+                    <div class="input-group col-md-6">
+                    <input required="required" name="%1$s[{{$key}}][]" value="{{$v}}" type="text" class="form-control"><span class="input-group-btn">
+                    <button type="button" class="btn btn-danger remove-action"><i class="fa fa-minus-circle"></i></button></span>
+                    </div>
+                </div>
+            @endforeach
+            @endforeach
+        @endif
+        <div class="input-group col-md-8">
+            <input type="text" id="%1$s_key" placeholder="Key" class="form-control">
+            <span class="input-group-btn"><button type="button" data-name="%1$s" class="btn btn-default append-action"><i class="fa fa-plus-circle"></i></button></span>
+        </div>

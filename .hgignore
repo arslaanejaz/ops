@@ -1,0 +1,17 @@
+## Laravel specific
+^\.env$
+^vendor
+^.idea
+composer.lock
+
+## General
+\.DS_Store$
+[Tt]humbs\.db$
+
+## Keep these folders, but ignore their content
+^bootstrap/cache/(?!\.gitignore).+$
+^storage/logs/(?!\.gitignore).+$
+^storage/app/(?!\.gitignore).+$
+^storage/framework/views/(?!\.gitignore).+$
+^storage/framework/sessions/(?!\.gitignore).+$
+^storage/framework/cache/(?!\.gitignore).+$

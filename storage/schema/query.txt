@@ -1,0 +1,29 @@
+php artisan crud:generate Projects --fields_from_file="storage/schema/project.json" --model-namespace=Models
+php artisan crud:generate Links --fields_from_file="storage/schema/link.json" --model-namespace=Models
+php artisan crud:generate Forms --fields_from_file="storage/schema/form.json" --model-namespace=Models
+php artisan crud:generate Test --fields_from_file="storage/schema/test.json" --model-namespace=Models
+php artisan crud:generate TestCases --fields_from_file="storage/schema/testcases.json" --model-namespace=Models
+php artisan crud:generate Docs --fields_from_file="storage/schema/docs.json" --model-namespace=Models
+php artisan crud:view posts --fields="title#array;"
+
+
+
+{
+    '_id': ObjectId("59afbfdc33478f0720001c37"),
+    'name': 'appapi local',
+    'uri': 'http://laravel.appapi:8082/admin',
+    'login_link': 'http://laravel.appapi:8082/admin/login',
+    'host': 'laravel.appapi',
+    'updated_at': ISODate("2017-09-19T20:37:35.0Z"),
+    'created_at': ISODate("2017-09-06T09:29:00.0Z"),
+    'skip_uri': {
+        'regex': [ 'auth\\/logout', 'settings\\/fillages', '\\/clubquery\\/delete_club\\/[a-z0-9]*' ],
+        'query': [ 'page' ]
+    },
+    'skip_repeat': {
+        'regex': [ 'users#inline_[0-9]*', 'reporterId=[a-z0-9]*', 'club_id=[a-z0-9]*', '\\/games\\/[a-z0-9]*', '\\/clubquery\\/delete_club\\/[a-z0-9]*', 'team_id=[a-z0-9]*', '\\/games\\/[a-z0-9]*$', '\\/clubs\\/[a-z0-9]*\\/edit', '\\/cups\\/[a-z0-9]*\\/edit', '\\/teams\\/[a-z0-9]*\\/edit', '\\/referee\\/[a-z0-9]*\\/edit' ]
+    },
+    'skip_repeat_form': {
+        'regex': [ '\\/referee\\/[a-z0-9]*\\/edit', '\\/deleteplayer\\/[a-z0-9]*', '\\/game\\/[a-z0-9]*\\/feed\\/[a-z0-9]*', '\\/games\\/[a-z0-9]*$' ]
+    }
+}

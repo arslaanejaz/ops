@@ -1,0 +1,56 @@
+{
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "uri",
+      "type": "string"
+    },
+    {
+      "name": "login",
+      "type": "array"
+    },
+    {
+      "name": "host",
+      "type": "string"
+    },
+    {
+      "name": "skip_uri",
+      "type": "array"
+    },
+    {
+      "name": "skip_repeat",
+      "type": "array"
+    },
+    {
+      "name": "skip_repeat_form",
+      "type": "array"
+    },
+    {
+      "name": "x_headers",
+      "type": "array"
+    },
+    {
+      "name": "testing",
+      "type": "select",
+      "options": ["", "On", "Off"]
+    }
+  ],
+
+  "validations": [
+    {
+      "field": "name",
+      "rules": "required|max:20"
+    },
+    {
+      "field": "uri",
+      "rules": "required"
+    },
+    {
+      "field": "host",
+      "rules": "required"
+    }
+  ]
+}

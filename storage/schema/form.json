@@ -1,0 +1,42 @@
+{
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "attr",
+      "type": "string"
+    },
+    {
+      "name": "status",
+      "type": "number"
+    }
+  ],
+  "relationships": [
+    {
+      "name": "project",
+      "type": "belongsTo",
+      "class": "App\\Project"
+    },
+    {
+      "name": "link",
+      "type": "belongsTo",
+      "class": "App\\Link"
+    }
+  ],
+  "validations": [
+    {
+      "field": "uri",
+      "rules": "required"
+    },
+    {
+      "field": "title",
+      "rules": "required"
+    },
+    {
+      "field": "type",
+      "rules": "required"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "fields": [
+    {
+      "name": "url",
+      "type": "string"
+    },{
+      "name": "request",
+      "type": "string"
+    },{
+      "name": "method",
+      "type": "string"
+    },{
+      "name": "response",
+      "type": "text"
+    }
+  ]
+}

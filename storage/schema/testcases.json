@@ -1,0 +1,27 @@
+{
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },{
+      "name": "action",
+      "type": "string"
+    },{
+      "name": "method",
+      "type": "string"
+    },{
+      "name": "__method",
+      "type": "string"
+    },{
+      "name": "type",
+      "type": "select",
+      "options": ["form-data", "x-www-from-urlencoded", "raw", "binary", "other"]
+    },{
+      "name": "obj",
+      "type": "text"
+    },{
+      "name": "options",
+      "type": "array"
+    }
+  ]
+}
