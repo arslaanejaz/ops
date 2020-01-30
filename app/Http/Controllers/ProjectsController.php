@@ -24,15 +24,15 @@ class ProjectsController extends Controller
 
         if (!empty($keyword)) {
             $projects = Project::where('name', 'LIKE', "%$keyword%")
-				->orWhere('uri', 'LIKE', "%$keyword%")
-				->orWhere('login', 'LIKE', "%$keyword%")
-				->orWhere('host', 'LIKE', "%$keyword%")
-				->orWhere('skip_uri', 'LIKE', "%$keyword%")
-				->orWhere('skip_repeat', 'LIKE', "%$keyword%")
-				->orWhere('skip_repeat_form', 'LIKE', "%$keyword%")
-				->orWhere('x_headers', 'LIKE', "%$keyword%")
-				->orWhere('testing', 'LIKE', "%$keyword%")
-				->paginate($perPage);
+                ->orWhere('uri', 'LIKE', "%$keyword%")
+                ->orWhere('login', 'LIKE', "%$keyword%")
+                ->orWhere('host', 'LIKE', "%$keyword%")
+                ->orWhere('skip_uri', 'LIKE', "%$keyword%")
+                ->orWhere('skip_repeat', 'LIKE', "%$keyword%")
+                ->orWhere('skip_repeat_form', 'LIKE', "%$keyword%")
+                ->orWhere('x_headers', 'LIKE', "%$keyword%")
+                ->orWhere('testing', 'LIKE', "%$keyword%")
+                ->paginate($perPage);
             $total = $projects->total();
         } else {
             $projects = Project::paginate($perPage);
@@ -62,12 +62,12 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'name' => 'required|max:20',
-			'uri' => 'required',
-			'host' => 'required'
-		]);
+            'name' => 'required|max:20',
+            'uri' => 'required',
+            'host' => 'required'
+        ]);
         $requestData = $request->all();
-        
+
         Project::create($requestData);
 
         Session::flash('flash_message', 'Project added!');
@@ -116,18 +116,18 @@ class ProjectsController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, [
-			'name' => 'required|max:20',
-			'uri' => 'required',
-			'host' => 'required'
-		]);
+            'name' => 'required|max:20',
+            'uri' => 'required',
+            'host' => 'required'
+        ]);
         $requestData = $request->all();
 
-        if(!isset($requestData['login'])) $requestData['login']=[];
-        if(!isset($requestData['skip_uri'])) $requestData['skip_uri']=[];
-        if(!isset($requestData['skip_repeat'])) $requestData['skip_repeat']=[];
-        if(!isset($requestData['skip_repeat_form'])) $requestData['skip_repeat_form']=[];
-        if(!isset($requestData['x_headers'])) $requestData['x_headers']=[];
-        
+        if (!isset($requestData['login'])) $requestData['login'] = [];
+        if (!isset($requestData['skip_uri'])) $requestData['skip_uri'] = [];
+        if (!isset($requestData['skip_repeat'])) $requestData['skip_repeat'] = [];
+        if (!isset($requestData['skip_repeat_form'])) $requestData['skip_repeat_form'] = [];
+        if (!isset($requestData['x_headers'])) $requestData['x_headers'] = [];
+
         $project = Project::findOrFail($id);
         $project->update($requestData);
 

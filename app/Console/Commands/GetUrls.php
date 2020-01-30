@@ -44,7 +44,7 @@ class GetUrls extends Command
     {
         $url = $this->argument('url');
         $parse = parse_url($url);
-        if(isset($parse['host']) && $parse['host']!=''){
+        if (isset($parse['host']) && $parse['host'] != '') {
             $this->goutteClient = new Client();
             $this->guzzleClient = new GuzzleClient(array(
                 'timeout' => 60,
@@ -52,23 +52,25 @@ class GetUrls extends Command
             ));
             $this->goutteClient->setClient($this->guzzleClient);
             $this->project = Project::where('uri', 'like', $url)->first();
-            if($this->project){
+            if ($this->project) {
                 $this->createFirstLink();
-            }else{
+            } else {
                 $this->project = Project::create(
-                    ['name'=>$parse['host'], 'uri'=> $url, 'host'=>$parse['host'],
-                        'description'=>'This project created by batch job.', 'category'=>0]
+                    [
+                        'name' => $parse['host'], 'uri' => $url, 'host' => $parse['host'],
+                        'description' => 'This project created by batch job.', 'category' => 0
+                    ]
                 );
                 $this->createFirstLink();
             }
             $this->grabLinks(1);
-
-        }else{
+        } else {
             $this->error('Url is not correct.');
         }
     }
 
-    function grabLinks($number) {
+    function grabLinks($number)
+    {
 
         if ($number < 1) {
             $this->info("-------process complete---------");
@@ -77,19 +79,19 @@ class GetUrls extends Command
 
             $notScraped = Link::where('scraped', 0)->where('type', 0)->where('project_id', $this->project->id)->get();
 
-            foreach($notScraped as $link){
+            foreach ($notScraped as $link) {
                 $this->info("$link->uri scraping...");
                 $links = $this->goutteClient->request('GET', $link->uri)->filter('a')->links();
                 $unquelinks = [];
-                foreach($links as $ll){
+                foreach ($links as $ll) {
                     $unquelinks[$ll->getUri()] = $ll->getNode()->textContent;
                 }
-                foreach($unquelinks as $key=>$val){
+                foreach ($unquelinks as $key => $val) {
                     $first = Link::where('uri', 'like', $key)->first();
-                    if(!$first){
+                    if (!$first) {
                         $type = 1;
-                        if(stristr($key, $this->project->host) || strpos($key,"/") == '0')$type = 0;
-                        $this->createLink($key,$val,0,$type);
+                        if (stristr($key, $this->project->host) || strpos($key, "/") == '0') $type = 0;
+                        $this->createLink($key, $val, 0, $type);
                     }
                 }
                 $link->scraped = 1;
@@ -102,20 +104,22 @@ class GetUrls extends Command
         }
     }
 
-    private function createFirstLink(){
+    private function createFirstLink()
+    {
         $firstLink = Link::where('uri', 'like', $this->project->uri)
             ->where('project_id', $this->project->id)->first();
-        if(!$firstLink){
-            $firstLink = $this->createLink($this->project->uri,'First Link', 0, 0);
+        if (!$firstLink) {
+            $firstLink = $this->createLink($this->project->uri, 'First Link', 0, 0);
             $this->info("$firstLink->uri new link created.");
         }
     }
-    
-    private function createLink($uri,$title, $scraped, $type){
+
+    private function createLink($uri, $title, $scraped, $type)
+    {
         return Link::create([
-            'uri'=>$uri,
-            'title'=>$title, 'scraped'=>$scraped, 'type'=>$type,
-            'project_id'=>$this->project->id
+            'uri' => $uri,
+            'title' => $title, 'scraped' => $scraped, 'type' => $type,
+            'project_id' => $this->project->id
         ]);
     }
 }

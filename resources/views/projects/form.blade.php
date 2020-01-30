@@ -10,7 +10,7 @@
                     '<div class="form-group ">' +
                     '<label class="col-md-2 control-label">'+val+' => </label>' +
                     '<div class="input-group col-md-6">' +
-                    '<input required="required" name="'+name+'['+val+'][]" type="text" class="form-control"><span class="input-group-btn">' +
+                    '<input required="required" name="'+name+'['+val+'][]" type="text" placeholder="(.*)blog\\/p\\/(.*)" class="form-control"><span class="input-group-btn">' +
                     '<button type="button" class="btn btn-danger remove-action"><i class="fa fa-minus-circle"></i></button></span>' +
                     '</div>' +
                     '</div>'
@@ -25,13 +25,13 @@
 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'Name', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name of project', 'required' => 'required']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('uri') ? 'has-error' : ''}}">
     {!! Form::label('uri', 'Uri', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('uri', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::text('uri', null, ['class' => 'form-control',  'placeholder' => 'http://xxx.example.com:8080/', 'required' => 'required']) !!}
         {!! $errors->first('uri', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('login') ? 'has-error' : ''}}">
@@ -60,7 +60,7 @@
 </div><div class="form-group {{ $errors->has('host') ? 'has-error' : ''}}">
     {!! Form::label('host', 'Host', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('host', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::text('host', null, ['class' => 'form-control', 'placeholder' => 'xxx.example.com', 'required' => 'required']) !!}
         {!! $errors->first('host', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('skip_uri') ? 'has-error' : ''}}">
