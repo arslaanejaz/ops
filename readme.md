@@ -1,3 +1,8 @@
+## Start
+To start server:
+
+<code>php artisan serve</code>
+
 ## About jobs
 
 ops:test command look for testing=1 in db for projects.
