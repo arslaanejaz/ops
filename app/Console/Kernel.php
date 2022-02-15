@@ -17,7 +17,8 @@ class Kernel extends ConsoleKernel
         Commands\Test::class,
         Commands\GrabContent::class,
         Commands\GetPageSpeed::class,
-        Commands\GetSiteMap::class
+        Commands\GetSiteMap::class,
+        Commands\Productdata\ProductdataMigrate::class
     ];
 
     /**
