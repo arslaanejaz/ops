@@ -55,41 +55,40 @@ class ProductdataMigrate extends Command
         $offset = (int) $this->argument('offset');
         $limit = (int) $this->argument('limit');
 
-        $mywpdivisions = DB::connection('mysql')->select('select * from mywpdivisions');
-        // print_r($mywpdivisions);
+        // $this->table_to_collection('mywpdivisions', 'divisions');
+        // $this->table_to_collection('mywpastm', 'astms');
+        // $this->table_to_collection('mywpcertifications', 'certifications');
+        // $this->table_to_collection('mywpusers', 'users');
+        // $this->table_to_collection('projects', 'projects');
+        // $this->table_to_collection('products', 'products');
+        // $this->table_to_collection('mywpprojectcategory', 'product_project_division');
+        // $this->table_to_collection('product_divisions', 'product_divisions');
+        $this->table_to_collection('file_products', 'product_files');
 
-        foreach($mywpdivisions as $key=>$row){
-            $this->info($row->name);
-            DB::collection('divisions')->insert([
-                'name' => $row->name,
-                'created_at' => $row->created_at,
-                'updated_at' => $row->updated_at
-            ]);
-        }
+        // $this->manufacturers();
 
         $this->info('done ...');
-
     }
 
-    private function curl($url)
+
+    private function manufacturers()
     {
-        $newUrl = "https://www.googleapis.com/pagespeedonline/v4/runPagespeed?url=$url&key=AIzaSyBMJCb2uLy_P5Wh2_WoWJfKQ0Fwezl2uno";
+        $users = DB::connection('mysql')->select("select * from mywpusers where id = 15546");
+        foreach ($users as $user) {
+            $this->info($user->id);
+            DB::collection('users')->insert((array) $user);
+        }
+        $this->info('$user done ...');
+    }
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $newUrl);
-        curl_setopt($ch, CURLOPT_POST, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    private function table_to_collection($table, $collection)
+    {
+        $all = DB::connection('mysql')->select("select * from $table");
 
-        $server_output = curl_exec($ch);
-
-        curl_close($ch);
-
-        return $server_output;
-        //        if ($server_output == "OK") {
-        //            return ["data"=>$server_output, "status"=>1];
-        //        } else {
-        //            return ["data"=>$server_output, "status"=>0];
-        //        }
-
+        foreach ($all as $key => $row) {
+            $this->info($row->id);
+            DB::collection($collection)->insert((array) $row);
+        }
+        $this->info("$table done ...");
     }
 }
