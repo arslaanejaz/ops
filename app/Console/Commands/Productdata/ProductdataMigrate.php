@@ -72,11 +72,33 @@ class ProductdataMigrate extends Command
         // $this->table_to_collection('product_certificates', 'product_certificates');
         // $this->table_to_collection('mywpfaq', 'product_faqs');
 
-        // $this->manufacturers();
+        // $this->deleteExtraData();
 
         $this->info('done ...');
     }
 
+
+    private function deleteExtraData()
+    {
+        $users = DB::connection('mysql')->select("select * from mywpusers");
+        foreach ($users as $user) {
+            $this->info($user->id);
+            $products_ct = DB::connection('mysql')->select("select count(*) ct from products where user_id = $user->id");
+            $projects_ct = DB::connection('mysql')->select("select count(*) ct from projects where user_id = $user->id && name not like '%sample project'");
+
+            if (
+                $products_ct[0]->ct > 0 ||
+                $projects_ct[0]->ct > 0
+            ) {
+                $this->info("Don't delete");
+                $this->info("products: " . $products_ct[0]->ct);
+                $this->info("projects: " . $projects_ct[0]->ct);
+            } else {
+                $this->info("delete $user->id");
+                DB::connection('mysql')->table('mywpusers')->where('id', $user->id)->delete();
+            }
+        }
+    }
 
     private function manufacturers()
     {
