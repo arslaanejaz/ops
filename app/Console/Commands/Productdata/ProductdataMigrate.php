@@ -55,15 +55,22 @@ class ProductdataMigrate extends Command
         $offset = (int) $this->argument('offset');
         $limit = (int) $this->argument('limit');
 
+        // $this->table_to_collection('mywpfaq', 'mywpfaq');
         // $this->table_to_collection('mywpdivisions', 'divisions');
         // $this->table_to_collection('mywpastm', 'astms');
         // $this->table_to_collection('mywpcertifications', 'certifications');
+
         // $this->table_to_collection('mywpusers', 'users');
+
         // $this->table_to_collection('projects', 'projects');
         // $this->table_to_collection('products', 'products');
         // $this->table_to_collection('mywpprojectcategory', 'product_project_division');
+
         // $this->table_to_collection('product_divisions', 'product_divisions');
-        $this->table_to_collection('file_products', 'product_files');
+        // $this->table_to_collection('product_astm', 'product_astm');
+        // $this->table_to_collection('file_products', 'product_files');
+        // $this->table_to_collection('product_certificates', 'product_certificates');
+        // $this->table_to_collection('mywpfaq', 'product_faqs');
 
         // $this->manufacturers();
 
